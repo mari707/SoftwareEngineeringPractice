@@ -35,11 +35,14 @@ public class BankAccount {
     }
 
 
-    public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+    public static boolean isEmailValid(String email) {
+        if (email.indexOf('@') == -1) {
             return false;
-        }
-        else {
+        } else if (email.contains("-@") || email.contains("..") || email.contains("#") || !email.contains(".com")) {
+            return false;
+        } else if ( email.startsWith(".")) {
+            return false;
+        } else {
             return true;
         }
     }
