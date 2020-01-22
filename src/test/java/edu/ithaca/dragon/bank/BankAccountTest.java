@@ -24,12 +24,19 @@ class BankAccountTest {
     @Test
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
+        assertFalse( BankAccount.isEmailValid("abc-@mail.com"));
+        assertFalse( BankAccount.isEmailValid("abc..def@mail.com"));
+        assertFalse( BankAccount.isEmailValid(".abc@mail.com"));
+        assertFalse( BankAccount.isEmailValid("abc#def@mail.com"));
+        assertFalse( BankAccount.isEmailValid("abc.def@mail#archive.com"));
+        assertFalse( BankAccount.isEmailValid("abc.def@mail"));
         assertFalse( BankAccount.isEmailValid(""));
     }
 
     @Test
     void constructorTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
+
 
         assertEquals("a@b.com", bankAccount.getEmail());
         assertEquals(200, bankAccount.getBalance());
