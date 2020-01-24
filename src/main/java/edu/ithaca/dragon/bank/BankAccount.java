@@ -36,14 +36,18 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email) {
+        // equivalence class: email prefix; not border case
         if (email.indexOf('@') == -1) {
             return false;
-        } else if (email.contains("-@") || email.contains("..") || email.contains("#") || !email.contains(".com")) {
+        // equivalence class: email prefix; not border case
+        } else if (email.contains("-@") || email.contains("..") || email.startsWith(".")) {
             return false;
-        } else if ( email.startsWith(".")) {
+        // equivalence class: email domain; not border case
+        } else if (email.contains("#") || !email.contains(".com")) {
             return false;
         } else {
             return true;
         }
+        //no border cases clearly identifiable in a string from the tests provided?
     }
 }
