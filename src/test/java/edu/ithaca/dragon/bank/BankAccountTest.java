@@ -8,17 +8,51 @@ class  BankAccountTest {
 
     @Test
     void getBalanceTest() {
+        //Equivalence Class-valid balance
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
         assertEquals(200, bankAccount.getBalance());
+
+        //Equivalence Class- 0 starting balance
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 0);
+
+        assertEquals(0, bankAccount.getBalance());
+
+        //Equivalence Class- balance >1000
+        BankAccount bankAccount3 = new BankAccount("a@b.com", 5000);
+
+        assertEquals(5000, bankAccount.getBalance());
+
+
+
+
     }
 
     @Test
-    void withdrawTest() {
+    void withdrawTest() throws InsufficientFundsException {
+
+        //Equivalence Class-valid withdraw amount
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
-
         assertEquals(100, bankAccount.getBalance());
+
+
+        //Equivalence Class-Invalid withdraw amount
+        bankAccount.withdraw(0);
+        assertEquals(100, bankAccount.getBalance());
+
+        //Equivalence Class-InsufficientFundsException
+        bankAccount.withdraw(101);
+        assertEquals(-1, bankAccount.getBalance());
+
+        //Equivalence Class-valid withdraw amount
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
+        bankAccount.withdraw(1500);
+        assertEquals(500, bankAccount.getBalance());
+
+
+
+
     }
 
     @Test
@@ -47,7 +81,7 @@ class  BankAccountTest {
         //Equivalence class: invalid email-starting with a period
         assertFalse( BankAccount.isEmailValid(".abc@mail.com"));
         //Equivalence class: invalid email-Ony using Special characters
-        assertFalse( BankAccount.isEmailValid("&%^((@mail.com"));
+        assertFalse( BankAccount.isEmailValid("&%^@mail.com"));
         //Equivalence class: invalid email-Special characters in sub domain
         assertFalse( BankAccount.isEmailValid("abc.def@mail#archive.com"));
         //Equivalence class: invalid email-missing email domain
