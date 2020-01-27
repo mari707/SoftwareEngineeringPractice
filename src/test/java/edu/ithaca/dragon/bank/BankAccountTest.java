@@ -23,15 +23,46 @@ class  BankAccountTest {
 
     @Test
     void isEmailValidTest(){
+        //Equivalence class: valid email
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
-        assertFalse( BankAccount.isEmailValid("abc-@mail.com"));
+        //Equivalence class: valid email- dot in the sub domain
+        assertTrue(BankAccount.isEmailValid( "a@b.c.com"));
+        //Equivalence class: valid email- quotes around email
+        assertTrue(BankAccount.isEmailValid( "\"a\"@b.com"));
+        //Equivalence class: valid email- quotes around email
+        assertTrue(BankAccount.isEmailValid( "\"a\"@b.com"));
+        //Equivalence class: valid email- digits in email
+        assertTrue(BankAccount.isEmailValid( "1234@b.com"));
+        //Equivalence class: valid email- digits in email
+        assertTrue(BankAccount.isEmailValid( "1234@b.com"));
+        //Equivalence class: valid email- underscore in email
+        assertTrue(BankAccount.isEmailValid( "__a@b.com"));
+        //Equivalence class: valid email- dash
+        assertTrue(BankAccount.isEmailValid( "a-b@b.com"));
+
+
+
+        //Equivalence class: invalid email-consecutive periods
         assertFalse( BankAccount.isEmailValid("abc..def@mail.com"));
+        //Equivalence class: invalid email-starting with a period
         assertFalse( BankAccount.isEmailValid(".abc@mail.com"));
-        assertFalse( BankAccount.isEmailValid("abc#def@mail.com"));
+        //Equivalence class: invalid email-Ony using Special characters
+        assertFalse( BankAccount.isEmailValid("&%^((@mail.com"));
+        //Equivalence class: invalid email-Special characters in sub domain
         assertFalse( BankAccount.isEmailValid("abc.def@mail#archive.com"));
+        //Equivalence class: invalid email-missing email domain
         assertFalse( BankAccount.isEmailValid("abc.def@mail"));
+        //Equivalence class: invalid email-two @ signs
+        assertFalse( BankAccount.isEmailValid("abc.def@@mail"));
+        //Equivalence class: invalid email-missing @
+        assertFalse( BankAccount.isEmailValid("abc.defmail"));
+        //Equivalence class: invalid email-trailing period
+        assertFalse( BankAccount.isEmailValid("abc.@defmail.com"));
+        //Equivalence class: empty string
         assertFalse( BankAccount.isEmailValid(""));
     }
+
+
 
     @Test
     void constructorTest() {
