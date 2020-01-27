@@ -44,7 +44,9 @@ public class BankAccount {
         if (email.indexOf('@') == -1) {
             return false;
         // equivalence class: email prefix; not border case
-        } else if (email.contains("-@") || email.contains("..") || email.startsWith(".")) {
+        } else if (email.contains("-@") || email.contains("..") || email.startsWith(".") || email.contains(".@")) {
+            return false;
+        } else if (email.contains("&")){
             return false;
         // equivalence class: email domain; not border case
         } else if (email.contains("#") || !email.contains(".com")) {
