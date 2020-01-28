@@ -16,12 +16,12 @@ class  BankAccountTest {
         //Equivalence Class- 0 starting balance
         BankAccount bankAccount2 = new BankAccount("a@b.com", 0);
 
-        assertEquals(0, bankAccount.getBalance());
+        assertEquals(0, bankAccount2.getBalance());
 
         //Equivalence Class- balance >1000
         BankAccount bankAccount3 = new BankAccount("a@b.com", 5000);
 
-        assertEquals(5000, bankAccount.getBalance());
+        assertEquals(5000, bankAccount3.getBalance());
 
 
 
@@ -44,16 +44,31 @@ class  BankAccountTest {
 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
 
+        //Equivalence Class-InsufficientFundsException more than 2 decimal places
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(4.001));
+
         //Equivalence Class-valid withdraw amount >1000
         BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
         bankAccount.withdraw(1500);
-        assertEquals(500, bankAccount.getBalance());
+        assertEquals(500, bankAccount2.getBalance());
 
 
 
 
     }
+    @Test
+    void isAmountValidTest(){
+        assertTrue(BankAccount.isAmountValid(.01));
+        assertTrue(BankAccount.isAmountValid(01.00));
+        assertTrue(BankAccount.isAmountValid(100.0));
+        assertTrue(BankAccount.isAmountValid(1003.05));
 
+
+        assertFalse(BankAccount.isAmountValid(0.054));
+        assertFalse(BankAccount.isAmountValid(100.9084));
+        assertFalse(BankAccount.isAmountValid(100.977354));
+
+    }
     @Test
     void isEmailValidTest(){
         //Equivalence class: valid email

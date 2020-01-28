@@ -30,7 +30,7 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount < 0){
+        if (amount <= 0){
             throw new InsufficientFundsException("Cannot draw a negative amount of money");
         } else if (amount <= balance){
             balance -= amount;
@@ -39,7 +39,16 @@ public class BankAccount {
             throw new InsufficientFundsException("Not enough money");
         }
     }
+    /**
+     * @post limits the double to only two decimal places
+     */
+    public static boolean isAmountValid(double amount) {
 
+      return false;
+
+
+
+    }
 
     public static boolean isEmailValid(String email) {
         // equivalence class: email prefix; not border case
