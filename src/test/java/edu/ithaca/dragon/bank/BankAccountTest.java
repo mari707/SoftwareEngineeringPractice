@@ -38,14 +38,13 @@ class  BankAccountTest {
 
 
         //Equivalence Class-Invalid withdraw amount
-        bankAccount.withdraw(0);
-        assertEquals(100, bankAccount.getBalance());
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(0));
 
         //Equivalence Class-InsufficientFundsException
-        bankAccount.withdraw(101);
-        assertEquals(-1, bankAccount.getBalance());
 
-        //Equivalence Class-valid withdraw amount
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
+
+        //Equivalence Class-valid withdraw amount >1000
         BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
         bankAccount.withdraw(1500);
         assertEquals(500, bankAccount.getBalance());
