@@ -1,5 +1,7 @@
 package edu.ithaca.dragon.bank;
 
+import java.math.BigDecimal;
+
 public class BankAccount {
 
     private String email;
@@ -40,13 +42,14 @@ public class BankAccount {
         }
     }
     /**
-     * @post limits the double to only two decimal places
+     *  limits the double to only two decimal places
+     *  amount cannot be less than 1
+     *  Returns either true or false
      */
     public static boolean isAmountValid(double amount) {
 
-      return false;
 
-
+        return BigDecimal.valueOf(amount).scale() <= 2 && amount > 0;
 
     }
 

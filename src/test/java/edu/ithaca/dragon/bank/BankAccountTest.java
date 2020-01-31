@@ -45,7 +45,7 @@ class  BankAccountTest {
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
 
         //Equivalence Class-InsufficientFundsException more than 2 decimal places
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(4.001));
+        //assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(4.001));
 
         //Equivalence Class-valid withdraw amount >1000
         BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
@@ -56,17 +56,34 @@ class  BankAccountTest {
 
 
     }
+
+
     @Test
     void isAmountValidTest(){
+        //Equivalence class: valid amount-positive int
+        assertTrue(BankAccount.isAmountValid(1));
+        //Equivalence class: valid decimal- no decimal
+        assertTrue(BankAccount.isAmountValid(10));
+        //Equivalence class: valid decimal- starts with a decimal
         assertTrue(BankAccount.isAmountValid(.01));
+        //Equivalence class: valid decimal- two ints before decimal
         assertTrue(BankAccount.isAmountValid(01.00));
+        //Equivalence class: valid decimal- only one decimal
         assertTrue(BankAccount.isAmountValid(100.0));
+        //Equivalence class: valid decimal- two  decimals
         assertTrue(BankAccount.isAmountValid(1003.05));
 
-
+        //Equivalence class: invalid decimal- three  decimals
         assertFalse(BankAccount.isAmountValid(0.054));
+        //Equivalence class: invalid decimal- four  decimals
         assertFalse(BankAccount.isAmountValid(100.9084));
-        assertFalse(BankAccount.isAmountValid(100.977354));
+        //Equivalence class: invalid decimal- 10  decimals
+        assertFalse(BankAccount.isAmountValid(100.9773543789));
+        //Equivalence class: invalid amount - 0
+        assertFalse(BankAccount.isAmountValid(0));
+        //Equivalence class: invalid amount- negative
+        assertFalse(BankAccount.isAmountValid(-30));
+
 
     }
     @Test
