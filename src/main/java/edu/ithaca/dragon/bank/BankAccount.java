@@ -84,12 +84,14 @@ public class BankAccount {
      *  @throws IllegalArgumentException if amount is invalid
      *
      */
-    public void transfer (double amount){
+    public void transfer (BankAccount accountFrom, BankAccount accountTo, double amount) throws InsufficientFundsException {
+        accountFrom.withdraw(amount);
+        accountTo.deposit(amount);
 
     }
 
     /**
-     *  @post Adds deposit amount to balance if amount is non-negative and smaller than balance
+     *  @post Adds deposit amount to balance if amount is non-negative and less than two decimal places
      *  @throws IllegalArgumentException if amount is invalid
      *
      */

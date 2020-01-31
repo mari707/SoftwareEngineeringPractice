@@ -87,17 +87,42 @@ class  BankAccountTest {
 
 
 
+
     }
 
 
 
     @Test
-    void transferTest(){
+    void transferTest() throws InsufficientFundsException {
 
-        //Equivalence class: valid amount-positive int
+        //Equivalence class: valid amount-positive int $1
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
-        bankAccount.transfer(100);
-        assertEquals(100, bankAccount.getBalance());
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 300);
+        bankAccount.transfer(bankAccount,bankAccount2,1);
+        assertEquals(199, bankAccount.getBalance());
+        assertEquals(301, bankAccount2.getBalance());
+
+        //Equivalence class: valid amount-positive int >1
+        bankAccount.transfer(bankAccount,bankAccount2,100);
+        assertEquals(99, bankAccount.getBalance());
+        assertEquals(401, bankAccount2.getBalance());
+
+        //Equivalence class: valid amount -decimals
+        bankAccount.transfer(bankAccount,bankAccount2,1.0);
+        assertEquals(98, bankAccount.getBalance());
+        assertEquals(402, bankAccount2.getBalance());
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount,bankAccount2,-1));
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount2.transfer(bankAccount,bankAccount2,-10));
+
+        //Equivalence Class-Invalid transfer amount 0
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2,bankAccount,0));
+
+        //Equivalence Class-InsufficientFundsException
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(bankAccount,bankAccount2,4000));
 
 
 
