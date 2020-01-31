@@ -78,4 +78,31 @@ public class BankAccount {
         }
         //no border cases clearly identifiable in a string from the tests provided?
     }
+    /**
+     *  @post reduces the balance by amount if amount is non-negative and smaller than balance
+     *  Adds amount to another account
+     *  @throws IllegalArgumentException if amount is invalid
+     *
+     */
+    public void transfer (double amount){
+
+    }
+
+    /**
+     *  @post Adds deposit amount to balance if amount is non-negative and smaller than balance
+     *  @throws IllegalArgumentException if amount is invalid
+     *
+     */
+    public void deposit (double amount){
+        if (isAmountValid(amount)){
+            balance += amount;
+        }
+        else {
+            throw new IllegalArgumentException("invalid amount ");
+
+        }
+
+
+    }
+
 }

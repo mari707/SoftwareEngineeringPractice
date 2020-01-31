@@ -41,7 +41,7 @@ class  BankAccountTest {
 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
 
-        
+
         //Equivalence Class-IllegalArgumentException more than 2 decimal places
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(1045.078));
         //Equivalence Class-IllegalArgumentException more than 2 decimal places
@@ -55,6 +55,49 @@ class  BankAccountTest {
 
         //Equivalence Class-IllegalArgumentException negative amount
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-10));
+
+
+
+
+
+    }
+
+    @Test
+    void depositTest(){
+        //Equivalence class: valid amount-positive int
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        bankAccount.deposit(100);
+        assertEquals(300, bankAccount.getBalance());
+
+        bankAccount.deposit(1);
+        assertEquals(301, bankAccount.getBalance());
+
+        bankAccount.deposit(5000);
+        assertEquals(5301, bankAccount.getBalance());
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-1));
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-10));
+
+        //Equivalence Class-IllegalArgumentException  more than 2 decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(1.908));
+
+
+
+
+    }
+
+
+
+    @Test
+    void transferTest(){
+
+        //Equivalence class: valid amount-positive int
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        bankAccount.transfer(100);
+        assertEquals(100, bankAccount.getBalance());
 
 
 
