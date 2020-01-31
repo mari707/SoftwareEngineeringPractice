@@ -37,20 +37,29 @@ class  BankAccountTest {
         assertEquals(100, bankAccount.getBalance());
 
 
-        //Equivalence Class-Invalid withdraw amount
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(0));
-
         //Equivalence Class-InsufficientFundsException
 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
-
-        //Equivalence Class-InsufficientFundsException more than 2 decimal places
-        //assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(4.001));
 
         //Equivalence Class-valid withdraw amount >1000
         BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
         bankAccount.withdraw(1500);
         assertEquals(500, bankAccount2.getBalance());
+
+        //Equivalence Class-IllegalArgumentException more than 2 decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(1045.078));
+        //Equivalence Class-IllegalArgumentException more than 2 decimal places
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(1.02839));
+        //Equivalence Class-Invalid withdraw amount 0
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(0));
+
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-1));
+
+        //Equivalence Class-IllegalArgumentException negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-10));
+
 
 
 
@@ -138,6 +147,18 @@ class  BankAccountTest {
         assertEquals(200, bankAccount.getBalance());
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+
+        //check for exception thrown correctly
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", -1));
+
+        //check for exception thrown correctly- 0 starting balance
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 0));
+
+        //check for exception thrown correctly- more than 2 decimal places starting balance
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 123.8903));
+
+        //check for exception thrown correctly- $1 starting balance
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 1));
     }
 
 }
