@@ -41,11 +41,7 @@ class  BankAccountTest {
 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(101));
 
-        //Equivalence Class-valid withdraw amount >1000
-        BankAccount bankAccount2 = new BankAccount("a@b.com", 2000);
-        bankAccount.withdraw(1500);
-        assertEquals(500, bankAccount2.getBalance());
-
+        
         //Equivalence Class-IllegalArgumentException more than 2 decimal places
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(1045.078));
         //Equivalence Class-IllegalArgumentException more than 2 decimal places
